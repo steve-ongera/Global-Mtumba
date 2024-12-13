@@ -1,0 +1,39 @@
+product :
+- name
+- image
+- images
+- flag
+- review :
+    - image
+    - date
+    - rate
+    - review
+- price
+- sku
+- brand :
+    - name 
+    - image
+    - products count
+    -
+- reviews count
+- subtitle
+- tags
+- description
+- related items
+- quantity
+---------------
+orders :
+- code
+- order time
+- delivery time
+- address
+- discount
+- total products
+- delivery fee
+- status [Received,Processed,Shipped,Delivered]
+- products
+    - name
+    - image
+    - price
+    - quantity
+    - brand
