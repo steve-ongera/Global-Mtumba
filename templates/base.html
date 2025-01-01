@@ -18,20 +18,20 @@
 
         <!-- TEMPLATE META -->
         <meta name="name" content="Greeny">
-        <meta name="title" content="Greeny - eCommerce HTML Template">
-        <meta name="keywords" content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store">
+        <meta name="title" content="Yuvaa - Fashonna">
+        <meta name="keywords" content="yuvaa, fuvaa fashonna, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store">
         <!--=====================================
                     META-TAG PART END
         =======================================-->
 
         <!-- WEBPAGE TITLE -->
-        <title> Jumia | Home </title>
+        <title> Yuvaa Fashonna | Home </title>
 
         <!--=====================================
                     CSS LINK PART START
         =======================================-->
         <!-- FAVICON -->
-        <link rel="icon" href="images/favicon.png">
+        <link rel="icon" href="{% static 'en/images/yuva_logo.png'%}">
 
         <!-- FONTS -->
 
@@ -76,7 +76,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-5">
                         <div class="header-top-welcome">
-                            <p>Welcome to Jumia  in Your Dream Online Store!</p>
+                            <p>Welcome to Yuvaa Fashonna  Your Dream Online Store!</p>
                         </div>
                     </div>
                     <div class="col-md-5 col-lg-3">
@@ -106,9 +106,9 @@
                     </div>
                     <div class="col-md-7 col-lg-4">
                         <ul class="header-top-list">
-                            <li><a href="offer.html">offers</a></li>
-                            <li><a href="faq.html">need help</a></li>
-                            <li><a href="contact.html">contact us</a></li>
+                            <li><a href="#">offers</a></li>
+                            <li><a href="#">need help</a></li>
+                            <li><a href="#">contact us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -127,8 +127,8 @@
             <div class="container">
                 <div class="header-content">
                     <div class="header-media-group">
-                        <button class="header-user"><img src="{% static 'ar/images/user.png'%}" alt="user"></button>
-                        <a href="index.html"><img src="{% static 'ar/images/logo.png'%}" alt="logo"></a>
+                        <button class="header-user"><img src="{% static 'en/images/user.png'%}" alt="user"></button>
+                        <a href="#"><img src="{% static 'en/images/logo.png'%}" alt="logo"></a>
                         <button class="header-src"><i class="fas fa-search"></i></button>
                     </div>
 
@@ -358,7 +358,7 @@
                 </li>
             </ul>
             <div class="category-footer">
-                <p>All Rights Reserved by <a href="#">Mironcoder</a></p>
+                <p>All Rights Reserved by <a href="#">InnovationHub Softwares </a></p>
             </div>
         </aside>
         <!--=====================================
@@ -388,7 +388,7 @@
                     <div class="cart-info-group">
                         <div class="cart-info">
                             <h6><a href="product-single.html">{{item.product}}</a></h6>
-                            <p>Unit Price - ${{item.price}}</p>
+                            <p>Unit Price - ksh{{item.price}}</p>
                         </div>
                         <div class="cart-action-group">
                             <div class="product-action">
@@ -421,12 +421,12 @@
         =======================================-->
         <aside class="nav-sidebar">
             <div class="nav-header">
-                <a href="#"><img src="images/logo.png" alt="logo"></a>
+                <a href="#"><img src="{% static 'en/images/logo.png'%}" alt="logo"></a>
                 <button class="nav-close"><i class="icofont-close"></i></button>
             </div>
             <div class="nav-content">
                 <div class="nav-btn">
-                    <a href="login.html" class="btn btn-inline">
+                    <a href="{% url 'login'%}" class="btn btn-inline">
                         <i class="fa fa-unlock-alt"></i>
                         <span>join here</span>
                     </a>
@@ -458,30 +458,30 @@
                     <li>
                         <a class="nav-link dropdown-link" href="#"><i class="icofont-home"></i>Home</a>
                         <ul class="dropdown-list">
-                            <li><a href="home-grid.html">Home grid</a></li>
-                            <li><a href="index.html">Home index</a></li>
-                            <li><a href="home-classic.html">Home classic</a></li>
-                            <li><a href="home-standard.html">Home standard</a></li>
-                            <li><a href="home-category.html">Home category</a></li>
+                            <li><a href="#">Home grid</a></li>
+                            <li><a href="#">Home index</a></li>
+                            <li><a href="#">Home classic</a></li>
+                            <li><a href="#">Home standard</a></li>
+                            <li><a href="#">Home category</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="nav-link dropdown-link" href="#"><i class="icofont-food-cart"></i>shop</a>
                         <ul class="dropdown-list">
-                            <li><a href="shop-5column.html">shop 5 column</a></li>
-                            <li><a href="shop-4column.html">shop 4 column</a></li>
-                            <li><a href="shop-3column.html">shop 3 column</a></li>
-                            <li><a href="shop-2column.html">shop 2 column</a></li>
-                            <li><a href="shop-1column.html">shop 1 column</a></li>
+                            <li><a href="#">shop 5 column</a></li>
+                            <li><a href="#">shop 4 column</a></li>
+                            <li><a href="#">shop 3 column</a></li>
+                            <li><a href="#">shop 2 column</a></li>
+                            <li><a href="#">shop 1 column</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="nav-link dropdown-link" href="#"><i class="icofont-page"></i>product</a>
                         <ul class="dropdown-list">
-                            <li><a href="product-tab.html">product tab</a></li>
-                            <li><a href="product-grid.html">product grid</a></li>
-                            <li><a href="product-video.html">product video</a></li>
-                            <li><a href="product-simple.html">product simple</a></li>
+                            <li><a href="#">product tab</a></li>
+                            <li><a href="#">product grid</a></li>
+                            <li><a href="#">product video</a></li>
+                            <li><a href="#">product simple</a></li>
                         </ul>
                     </li>
                     <li>
@@ -529,19 +529,19 @@
                         <i class="icofont-ui-touch-phone"></i>
                         <p>
                             <small>call us</small>
-                            <span>(+880) 183 8288 389</span>
+                            <span>+254 112284093</span>
                         </p>
                     </div>
                     <div class="nav-info">
                         <i class="icofont-ui-email"></i>
                         <p>
                             <small>email us</small>
-                            <span>support@greeny.com</span>
+                            <span>yuvaa@fashonna.com</span>
                         </p>
                     </div>
                 </div>
                 <div class="nav-footer">
-                    <p>All Rights Reserved by <a href="#">Mironcoder</a></p>
+                    <p>All Rights Reserved by <a href="#">InnovationHub Softwares </a></p>
                 </div>
             </div>
         </aside>
