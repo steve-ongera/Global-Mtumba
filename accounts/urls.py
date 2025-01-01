@@ -6,6 +6,6 @@ app_name = 'accounts'
 
 
 urlpatterns = [
-    path('signup',signup),
+    path('signup',signup , name='signup'),
     path('<str:username>/activate',activate)
 ]
