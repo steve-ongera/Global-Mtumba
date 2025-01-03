@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.db.models.aggregates import Avg
 from taggit.serializers import TagListSerializerField , TaggitSerializer
 from .models import Product ,Brand ,Review
-
+from django.db.models import Q, Avg
 
 
 class ProductListSerializer(serializers.ModelSerializer):

@@ -34,7 +34,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/", include("accounts.urls",namespace='accounts')),
     path('admin/', admin.site.urls),
-    path('products/', include('product.urls',namespace='products')),
+    path('products/', include('product.urls',namespace='product')),
     path('orders/', include('orders.urls',namespace='orders')),
     path('', include('settings.urls')),
     path("__debug__/", include("debug_toolbar.urls")),

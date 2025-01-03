@@ -6065,13 +6065,13 @@ tbody tr td:last-child {
 .footer-links {
   display: -ms-grid;
   display: grid;
-  grid-gap: 50px;
+  grid-gap: 20px;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
 }
 
 .footer-links ul li {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .footer-links ul li:last-child {
@@ -6079,7 +6079,8 @@ tbody tr td:last-child {
 }
 
 .footer-links ul li a {
-  color: var(--text);
+  color:#00000066;
+  /** color: var(--text); **/
   text-transform: capitalize;
   transition: all linear .3s;
   -webkit-transition: all linear .3s;

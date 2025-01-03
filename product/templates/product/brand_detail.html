@@ -86,13 +86,13 @@
                                     <button class="product-wish wish">
                                         <i class="fas fa-heart"></i>
                                     </button>
-                                    <a class="product-image" href="product-video.html">
+                                    <a class="product-image" href="{% url 'product:product-detail' object.slug %}">
                                         <img src="{{object.image.url}}" alt="product">
                                     </a>
                                     <div class="product-widget">
                                         <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
                                         <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play" data-autoplay="true" data-vbtype="video"></a>
-                                        <a title="Product View" href="#" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                        <a title="Product View" href="{% url 'product:product-detail' object.slug %}" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                     </div>
                                 </div>
                                 <div class="product-content">
@@ -108,7 +108,7 @@
                                         <a href="{{object.id}}"> {{object.name}} </a>
                                     </h6>
                                     <h6 class="product-price">
-                                        <span>${{object.price}}</span>
+                                        <span>ksh {{object.price}}</span>
                                     </h6>
                                     <button class="product-add" title="Add to Cart">
                                         <i class="fas fa-shopping-basket"></i>

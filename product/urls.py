@@ -8,7 +8,7 @@ app_name = 'product'
 urlpatterns = [
     path('' , ProductList.as_view()),
     path('debug' ,queryset_debug),
-    path('<slug:slug>' , ProductDetail.as_view()),
+    path('<slug:slug>', ProductDetail.as_view(), name='product-detail'),
     path('<slug:slug>/add-review' , add_review,name='add-review'),
 
     path('brands/' , BrandList.as_view()),

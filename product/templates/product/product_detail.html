@@ -11,11 +11,11 @@
         =======================================-->
         <section class="single-banner inner-section" style="background: url(images/single-banner.jpg) no-repeat center;">
             <div class="container">
-                <h2>product simple</h2>
+                <h2>{{ object.name }}</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item"><a href="shop-4column.html">shop-4column</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">product-simple</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ object.name }}</li>
                 </ol>
             </div>
         </section>
@@ -64,7 +64,7 @@
                                 <a href="#">(3 reviews)</a>
                             </div>
                             <h3 class="details-price">
-                                <span>${{object.price}}</span>
+                                <span>ksh {{object.price}}</span>
                             </h3>
                             <p class="details-desc">{{object.subtitle}}</p>
                             <div class="details-list-group">
@@ -130,7 +130,7 @@
                         </div>
                         <div class="product-details-frame">
                             <h3 class="frame-title">add your review</h3>
-                            <form id="review-form" class="review-form" method="post" action="{% url 'products:add-review' object.slug %}">
+                            <form id="review-form" class="review-form" method="post" action="{% url 'product:add-review' object.slug %}">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-lg-12">

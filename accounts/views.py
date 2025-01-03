@@ -3,6 +3,8 @@ from .forms import SignupForm , ActivationForm
 from django.contrib.auth.models import User
 from .models import Profile
 from django.core.mail import send_mail
+from django.contrib.auth import logout
+from django.views import View
 
 from django.conf import settings
 
@@ -35,6 +37,9 @@ def signup(request):
     return render(request, 'registration/register.html',{'form':form})
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 def activate(request,username):
     profile = Profile.objects.get(user__username=username)

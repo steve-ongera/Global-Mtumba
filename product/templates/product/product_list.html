@@ -5,10 +5,10 @@
         =======================================-->
         <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
             <div class="container">
-                <h2>Shop 4 Column</h2>
+                <h2>Online Drip store</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">shop-4column</li>
+                    <li class="breadcrumb-item active" aria-current="page">thrifty</li>
                 </ol>
             </div>
         </section>
@@ -370,7 +370,7 @@
                                         <button class="product-wish wish">
                                             <i class="fas fa-heart"></i>
                                         </button>
-                                        <a class="product-image" href="product-video.html">
+                                        <a class="product-image" href="{% url 'product:product-detail' object.slug %}">
                                             <img src="{{object.image.url}}" style= "width:178px; height:235px"  alt="product">
                                         </a>
                                         <div class="product-widget">

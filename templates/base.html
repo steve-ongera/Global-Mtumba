@@ -60,6 +60,8 @@
             <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
         {% endblock css %}
 
+        {% csrf_token %}
+
         <!--=====================================
                     CSS LINK PART END
         =======================================-->
@@ -135,10 +137,22 @@
                     <a href="/" class="header-logo">
                         <img src="{{company_data.logo.url}}" alt="logo">
                     </a>
-                    <a href="{% url 'login'%}" class="header-widget" title="My Account">
-                        <img src="{% static 'en/images/user.png'%}" alt="user">
-                        <span>join</span>
-                    </a>
+                    
+                    {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="header-widget" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <img src="{% static 'en/images/user.png' %}" alt="user">
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="header-widget" title="My Account">
+                            <img src="{% static 'en/images/user.png' %}" alt="user">
+                            <span>Login</span>
+                        </a>
+                    {% endif %}
+                    
 
                     <form class="header-form">
                         <input type="text" placeholder="Search anything...">
@@ -805,8 +819,8 @@
                         <h3 class="footer-title">Download Our App</h3>
                         <p class="footer-desc">Shop on the go with our mobile app. Download now for the best experience.</p>
                         <div class="footer-app">
-                            <a href="#"><img src="{% static 'en/images/google-store.png' %}" alt="Google Play"></a>
-                            <a href="#"><img src="{% static 'en/images/app-store.png' %}" alt="App Store"></a>
+                            <a href="#"><img src="{% static 'en/images/playstorelogo.png' %}" alt="Google Play"></a>
+                            <a href="#"><img src="{% static 'en/images/appstore.png' %}" alt="App Store"></a>
                         </div>
                     </div>
                 </div>
