@@ -1,3 +1,4 @@
+{% load static %}
 <h3 class="frame-title">Reviews {{reviews|length}}</h3>
 <ul class="review-list">
 
@@ -5,7 +6,7 @@
     <li class="review-item">
         <div class="review-media">
             <a class="review-avatar" href="#">
-                <img src="images/avatar/01.jpg" alt="review">
+                <img src="{% static 'en/images/profile.png'%}" alt="review">
             </a>
             <h5 class="review-meta">
                 <a href="#">{{review.user}}</a>

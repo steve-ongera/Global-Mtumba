@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
 <!--=====================================
                     BANNER PART START
@@ -25,7 +26,7 @@
                 <div class="row content-reverse">
                     <div class="col-lg-3">
                         <div class="shop-widget-promo">
-                            <a href="#"><img src="images/promo/shop/01.jpg" alt="promo"></a>
+                            <a href="#"><img src="{% static 'en/images/promo/shop/nikepromo.png'%}" alt="promo"></a>
                         </div>
                         <div class="shop-widget">
                             <h6 class="shop-widget-title">Filter by Price</h6>
