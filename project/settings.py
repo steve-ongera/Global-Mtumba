@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'taggit',
     'rest_framework',
     'settings',
-    #'debug_toolbar',
+    
     'product.apps.ProductConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,7 +68,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -98,6 +97,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'settings.company_context_processor.get_company_data',
                 'orders.cart_context_processor.get_or_create_cart',
+                 # Add your custom context processor here
+                'settings.brand_context_processors.brands_context',
             ],
         },
     },

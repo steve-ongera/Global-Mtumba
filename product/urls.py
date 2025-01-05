@@ -12,7 +12,7 @@ urlpatterns = [
     path('<slug:slug>/add-review' , add_review,name='add-review'),
 
     path('brands/' , BrandList.as_view()),
-    path('brands/<slug:slug>' , BrandDetail.as_view()),
+    path('brands/<slug:slug>' , BrandDetail.as_view()  , name='brand-detail' ),
 
 
 
