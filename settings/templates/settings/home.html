@@ -114,7 +114,7 @@
                                     <button class="product-wish wish">
                                         <i class="fas fa-heart"></i>
                                     </button>
-                                    <a class="product-image" >
+                                    <a href="{% url 'product:product-detail' item.slug %}" class="product-image" >
                                         <img href="{% url 'product:product-detail' item.slug %}" src="{{item.image.url}}" style="width:202.4px ; height:202.4px" alt="product">
                                     </a>
                                     <div class="product-widget">

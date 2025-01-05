@@ -134,18 +134,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # # {
+    # # #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # # # },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -220,9 +220,13 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'adhamgeka1@gmail.com'
-EMAIL_HOST_PASSWORD = 'yojz ztgf ywsf mbly'  # Use the correct password or app password
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'innovationhubsoftwaresltd@gmail.com'
+EMAIL_HOST_PASSWORD = 'wtzg mvcn ztoe qige'

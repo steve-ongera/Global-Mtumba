@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Profile</h2>
+  
+  <div>
+    <p><strong>Username:</strong> {{ profile.user.username }}</p>
+    <p><strong>First Name:</strong> {{ profile.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+    <p><strong>Shipping Address:</strong> {{ profile.shipping_address }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+    <p><strong>Gender:</strong> {{ profile.get_gender_display }}</p>
+    <p><strong>Payment Method:</strong> {{ profile.payment_method }}</p>
+    <p><strong>Profile Image:</strong> 
+      {% if profile.image %}
+        <img src="{{ profile.image.url }}" alt="Profile Image" width="100">
+      {% else %}
+        No profile image uploaded
+      {% endif %}
+    </p>
+    
+    <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+  </div>
+{% endblock %}

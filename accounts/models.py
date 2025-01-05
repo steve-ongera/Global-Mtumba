@@ -7,8 +7,20 @@ from utils.generate_code import generate_code
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile',null= True,blank=True)
-    code = models.CharField(max_length=10,default=generate_code)
+    image = models.ImageField(upload_to='profile', null=True, blank=True)
+    code = models.CharField(max_length=10, default=generate_code)
+    first_name = models.CharField(max_length=15, null=True, blank=True)
+    last_name = models.CharField(max_length=15, null=True, blank=True)
+    email = models.EmailField( null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
+    shipping_address = models.CharField(max_length=255, null=True, blank=True)  # New field for shipping address
+    date_of_birth = models.DateField(null=True, blank=True)  # Optional field for date of birth
+    gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], null=True, blank=True)  # Gender field
+    payment_method = models.CharField(max_length=50, null=True, blank=True)  # Payment method preference (e.g., Credit Card, PayPal)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
 
 
 @receiver(post_save,sender=User)
