@@ -635,11 +635,11 @@
                             <div class="col-md-6 col-lg-6">
                                 <div class="view-details">
                                     <h3 class="view-name">
-                                        <a href="product-video.html">existing product name</a>
+                                        <a href="product-video.html">Airforce one </a>
                                     </h3>
                                     <div class="view-meta">
                                         <p>SKU:<span>1234567</span></p>
-                                        <p>BRAND:<a href="#">radhuni</a></p>
+                                        <p>BRAND:<a href="#"></a></p>
                                     </div>
                                     <div class="view-rating">
                                         <i class="active icofont-star"></i>
@@ -650,16 +650,16 @@
                                         <a href="product-video.html">(3 reviews)</a>
                                     </div>
                                     <h3 class="view-price">
-                                        <del>$38.00</del>
-                                        <span>$24.00<small>/per kilo</small></span>
+                                        <del>ksh 38.00</del>
+                                        <span>ksh 20.00<small>/per kilo</small></span>
                                     </h3>
                                     <p class="view-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit non tempora magni repudiandae sint suscipit tempore quis maxime explicabo veniam eos reprehenderit fuga</p>
                                     <div class="view-list-group">
                                         <label class="view-list-title">tags:</label>
                                         <ul class="view-tag-list">
-                                            <li><a href="#">organic</a></li>
-                                            <li><a href="#">vegetable</a></li>
-                                            <li><a href="#">chilis</a></li>
+                                            <li><a href="#">Nike </a></li>
+                                            <li><a href="#">Unisex</a></li>
+                                            <li><a href="#">Fashion</a></li>
                                         </ul>
                                     </div>
                                     <div class="view-list-group">
@@ -699,6 +699,94 @@
                 </div> 
             </div> 
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get all product view buttons
+                const productViewButtons = document.querySelectorAll('.product-widget .fas.fa-eye');
+                
+                productViewButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Get the parent product card
+                        const productCard = this.closest('.product-card');
+                        
+                        // Get product details
+                        const productName = productCard.querySelector('.product-name a').textContent.trim();
+                        const productPrice = productCard.querySelector('.product-price span').textContent.trim();
+                        const productImage = productCard.querySelector('.product-image img').src;
+                        const productFlag = productCard.querySelector('.product-label .label-text').textContent.trim();
+                        const productRating = productCard.querySelector('.product-rating').innerHTML;
+                        
+                        // Update modal content
+                        const modal = document.getElementById('product-view');
+                        
+                        // Update product name
+                        modal.querySelector('.view-name a').textContent = productName;
+                        
+                        // Update price
+                        modal.querySelector('.view-price span').textContent = productPrice;
+                        
+                        // Update images in both preview and thumb sliders
+                        const previewSlider = modal.querySelectorAll('.preview-slider li img');
+                        const thumbSlider = modal.querySelectorAll('.thumb-slider li img');
+                        
+                        previewSlider.forEach(img => {
+                            img.src = productImage;
+                            img.alt = productName;
+                        });
+                        
+                        thumbSlider.forEach(img => {
+                            img.src = productImage;
+                            img.alt = productName;
+                        });
+                        
+                        // Update product labels
+                        const viewLabelGroup = modal.querySelector('.view-label-group');
+                        viewLabelGroup.innerHTML = `<label class="view-label new">${productFlag}</label>`;
+                        
+                        // Update rating
+                        const viewRating = modal.querySelector('.view-rating');
+                        viewRating.innerHTML = productRating;
+                        
+                        // Set up quantity buttons
+                        setupQuantityButtons(modal);
+                        
+                        // Set up wishlist button
+                        setupWishlistButton(modal);
+                    });
+                });
+                
+                // Function to handle quantity buttons
+                function setupQuantityButtons(modal) {
+                    const quantityInput = modal.querySelector('.action-input');
+                    const minusButton = modal.querySelector('.action-minus');
+                    const plusButton = modal.querySelector('.action-plus');
+                    
+                    minusButton.addEventListener('click', () => {
+                        let value = parseInt(quantityInput.value);
+                        if (value > 1) {
+                            quantityInput.value = value - 1;
+                        }
+                    });
+                    
+                    plusButton.addEventListener('click', () => {
+                        let value = parseInt(quantityInput.value);
+                        quantityInput.value = value + 1;
+                    });
+                }
+                
+                // Function to handle wishlist button
+                function setupWishlistButton(modal) {
+                    const wishButton = modal.querySelector('.view-wish');
+                    wishButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        wishButton.classList.toggle('wished');
+                    });
+                }
+            });
+        </script>
         <!--=====================================
                     PRODUCT VIEW END
         =======================================-->
@@ -763,78 +851,102 @@
                 INTRO PART END
 =======================================-->
 
-    <!--=====================================
-                    FOOTER PART START
-    =======================================-->
-    <footer class="footer-part">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget">
-                        <a class="footer-logo" href="#">
-                            <img src="{{company_data.logo.url}}" alt="Company Logo">
-                        </a>
-                        <p class="footer-desc">{{company_data.subtitle}}</p>
-                        <ul class="footer-social">
-                            <li><a href="{{company_data.facebook_link}}" target="_blank"><i class="fab fa-facebook"></i></a></li>
-                            <li><a href="{{company_data.twitter_link}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="{{company_data.linkedin_link}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                            <li><a href="{{company_data.instagram_link}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                        </ul>
+<!--=====================================
+                     FOOTER PART START
+        =======================================-->
+        <footer class="footer-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="footer-widget">
+                            <a class="footer-logo" href="#">
+                                <img src="{{company_data.logo.url}}" alt="logo">
+                            </a>
+                            <p class="footer-desc">{{company_data.subtitle}}</p>
+                            <ul class="footer-social">
+                                <li><a class="icofont-facebook" href="{{company_data.facebook_link}}"></a></li>
+                                <li><a class="icofont-twitter" href="{{company_data.twitter_link}}"></a></li>
+                                <li><a class="icofont-linkedin" href="{{company_data.linkedin_link}}"></a></li>
+                                <li><a class="icofont-instagram" href="{{company_data.instagram_link}}"></a></li>
+                                <li><a class="icofont-pinterest" href="{{company_data.pinterest_link}}"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="footer-widget contact">
+                            <h3 class="footer-title">contact us</h3>
+                            <ul class="footer-contact">
+                                <li>
+                                    <i class="icofont-ui-email"></i>
+                                    <p>
+                                        <span>{{company_data.email}}</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <i class="icofont-ui-touch-phone"></i>
+                                    <p>
+                                        <span>{{company_data.phones}}</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <i class="icofont-location-pin"></i>
+                                    <p>{{company_data.address}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="footer-widget">
+                            <h3 class="footer-title">quick Links</h3>
+                            <div class="footer-links">
+                                <ul>
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="#">Order History</a></li>
+                                    <li><a href="#">Order Tracking</a></li>
+                                    <li><a href="#">Best Seller</a></li>
+                                    <li><a href="#">New Arrivals</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Location</a></li>
+                                    <li><a href="#">Affiliates</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">Carrer</a></li>
+                                    <li><a href="#">Faq</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="footer-widget">
+                            <h3 class="footer-title">Download App</h3>
+                            <p class="footer-desc">Shop on the go! Enjoy exclusive deals, fast checkout, and real-time order tracking with our mobile app.</p>
+                            <div class="footer-app">
+                                <a href="#"><img src="{% static 'en/images/playstorelogo.png' %}" alt="Google Play"></a>
+                                <a href="#"><img src="{% static 'en/images/appstore.png' %}" alt="App Store"></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget contact">
-                        <h3 class="footer-title">Contact Us</h3>
-                        <ul class="footer-contact">
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <span>{{company_data.email}}</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <span>{{company_data.phones}}</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>{{company_data.address}}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget">
-                        <h3 class="footer-title">Quick Links</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Order History</a></li>
-                            <li><a href="#">Track Order</a></li>
-                            <li><a href="#">New Arrivals</a></li>
-                            <li><a href="#">Best Sellers</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget">
-                        <h3 class="footer-title">Download Our App</h3>
-                        <p class="footer-desc">Shop on the go with our mobile app. Download now for the best experience.</p>
-                        <div class="footer-app">
-                            <a href="#"><img src="{% static 'en/images/playstorelogo.png' %}" alt="Google Play"></a>
-                            <a href="#"><img src="{% static 'en/images/appstore.png' %}" alt="App Store"></a>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="footer-bottom">
+                            <p class="footer-copytext">&copy;  All Copyrights Reserved by <a target="_blank" href="https://innovationhubsoftwaresltd.com">InnvationHub softwares</a></p>
+                            <div class="footer-card">
+                                <a href="#"><img src="{%static 'en/images/payment/mpesa.png'%}" alt="payment"></a>
+                                <a href="#"><img src="{%static 'en/images/payment/pay-visa.png'%}" alt="payment"></a>
+                                <a href="#"><img src="{%static 'en/images/payment/pay-bank.png'%}" alt="payment"></a>
+                                <a href="#"><img src="{%static 'en/images/payment/pay-mastercard.png'%}" alt="payment"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row footer-bottom">
-                <div class="col-12 text-center">
-                    <p>&copy; 2025 All Rights Reserved. <a href="#">InnovationHub Softwares</a></p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--=====================================
-                    FOOTER PART END
-    =======================================-->
+        </footer>
+        <!--=====================================
+                      FOOTER PART END
+        =======================================-->
+
+   
 
         
 
