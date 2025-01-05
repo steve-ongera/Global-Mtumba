@@ -86,16 +86,21 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
-                                <form action="{% url 'orders:add_to_cart' %}" method="post">
-                                    {% csrf_token %}
-                                    <input class="" title="Quantity Number" type="text" name="quantity" value="1">
-                                    <input type="hidden" name="product_id" value="{{object.id}}">
-                                    <button type="submit" class="product-add" title="Add to Cart">
-                                        <i class="fas fa-shopping-basket"></i>
-                                        <span>add to cart</span>
-                                    </button>
-                                </form>
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'orders:add_to_cart' %}" method="post">
+                                        {% csrf_token %}
+                                        <input class="" title="Quantity Number" type="text" name="quantity" value="1">
+                                        <input type="hidden" name="product_id" value="{{ object.id }}">
+                                        <button type="submit" class="product-add" title="Add to Cart">
+                                            <i class="fas fa-shopping-basket"></i>
+                                            <span>add to cart</span>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <p>You must be logged in to add items to your cart. <a href="{% url 'login' %}?next={{ request.path }}">Login here</a></p>
+                                {% endif %}
                             </div>
+                            
                             <div class="details-action-group">
                                 <a class="details-wish wish" href="#" title="Add Your Wishlist">
                                     <i class="icofont-heart"></i>

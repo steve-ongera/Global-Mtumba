@@ -154,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -190,7 +190,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOCALE_PATHS = ['locale']
 
 LANGUAGES = [
-    ("ar", ("Arabic")),
+    #("ar", ("Arabic")),
     ("en", ("English")),
 ]
 
