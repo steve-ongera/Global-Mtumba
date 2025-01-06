@@ -24,7 +24,7 @@ class Product(models.Model):
     quantity = models.IntegerField(_('Quantity'))
     brand = models.ForeignKey('Brand',verbose_name=_('Brand'), related_name='product_brand', on_delete=models.SET_NULL, null=True)
     tags = TaggableManager()
-    slug = models.SlugField(null=True , blank=True)
+    slug = models.SlugField(null=True , blank=True )
 
     def __str__(self):
         return self.name

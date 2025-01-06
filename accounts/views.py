@@ -102,7 +102,7 @@ def update_profile(request):
 
             # Save the updated profile
             form.save()
-            return redirect('profile')  # Redirect to the profile page or any other page
+            return redirect('accounts:view_profile')  # Redirect to the profile page or any other page
     else:
         form = ProfileUpdateForm(instance=profile)
 

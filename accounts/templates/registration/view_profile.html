@@ -1,27 +1,191 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'en/css/product-details.css' %}">
+{% endblock css %}
 
-{% block content %}
-  <h2>Your Profile</h2>
-  
-  <div>
-    <p><strong>Username:</strong> {{ profile.user.username }}</p>
-    <p><strong>First Name:</strong> {{ profile.first_name }}</p>
-    <p><strong>Last Name:</strong> {{ profile.last_name }}</p>
-    <p><strong>Email:</strong> {{ profile.email }}</p>
-    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
-    <p><strong>Shipping Address:</strong> {{ profile.shipping_address }}</p>
-    <p><strong>Bio:</strong> {{ profile.bio }}</p>
-    <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
-    <p><strong>Gender:</strong> {{ profile.get_gender_display }}</p>
-    <p><strong>Payment Method:</strong> {{ profile.payment_method }}</p>
-    <p><strong>Profile Image:</strong> 
-      {% if profile.image %}
-        <img src="{{ profile.image.url }}" alt="Profile Image" width="100">
-      {% else %}
-        No profile image uploaded
-      {% endif %}
-    </p>
-    
-    <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+{% block body %}
+
+        <!--=====================================
+                    BANNER PART START
+        =======================================-->
+        <section class="single-banner inner-section" style="background: url(images/single-banner.jpg) no-repeat center;">
+            <div class="container">
+                <h2>{{ profile.user.username }}</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="shop-4column.html">profile</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ profile.first_name }}</li>
+                </ol>
+            </div>
+        </section>
+        <!--=====================================
+                    BANNER PART END
+        =======================================-->
+
+
+        <!--=====================================
+                PRODUCT DETAILS PART START
+        =======================================-->
+        <section class="inner-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="details-gallery">
+                            <div class="details-label-group">
+                                <label class="details-label new">{{profile.user.username}}</label>
+                            </div>
+                            <ul class="details-preview"> 
+                                {% if profile.image %}
+                                    <li><img src="{{ profile.image.url }}" alt="profile"></li>
+                                {% endif %}
+
+                            </ul>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="details-content">
+                            <h3 class="details-name"><a href="#">{{object.name}}</a></h3>
+                            <div class="details-meta">
+                                <p>DOB:<span>{{ profile.date_of_birth }}</span></p>
+                                <p>Phone:<a href="#">{{ profile.phone_number }}</a></p>
+                            </div>
+                           
+                            </div>
+                            <h3 class="details-price">
+                                <span></span>
+                            </h3>
+                            <p class="details-desc">{{ profile.first_name }} {{ profile.last_name  }}</p>
+        
+                            <p class="details-desc">{{ profile.email }}</p>
+                            <p class="details-desc">{{ profile.payment_method }}</p>
+
+                            <p class="details-desc">{{ profile.shipping_address }}</p>
+                            <div class="details-list-group">
+                                <label class="details-list-title">Gender:</label>
+                                <ul class="details-tag-list">
+                                   
+                                        <li><a href="#">{{ profile.get_gender_display }}</a></li>
+                                   
+                                    
+                                </ul>
+                            </div>
+
+                            <div class="details-list-group">
+                                <label class="details-list-title">Links:</label>
+                                <ul class="details-share-list">
+                                    <li><a href="#" class="icofont-facebook" title="Facebook"></a></li>
+                                    <li><a href="#" class="icofont-twitter" title="Twitter"></a></li>
+                                    <li><a href="#" class="icofont-linkedin" title="Linkedin"></a></li>
+                                    <li><a href="#" class="icofont-instagram" title="Instagram"></a></li>
+                                </ul>
+                            </div>
+                            <div class="details-add-group">
+                                {% if user.is_authenticated %}
+                                <div >
+                                    <a href="{% url 'accounts:update_profile' %}" class="btn btn-primary">Update Profile</a>
+                                  </div>
+                                {% else %}
+                                    <p>You must be logged in to add items to your cart. <a href="{% url 'login' %}?next={{ request.path }}">Login here</a></p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="details-action-group">
+                                <a class="details-wish wish" href="#" title="Add Your Wishlist">
+                                    <i class="icofont-trash"></i>
+                                    <span>Delete Account </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                PRODUCT DETAILS PART END
+        =======================================-->
+
+
+       
+        {% comment %}
+        <!--=====================================
+                    PRODUCT TAB PART END
+
+  <div class="profile-container">
+    <div class="profile-card">
+      <!-- Profile Image Section -->
+      <div class="profile-image">
+        <a href="#">
+          {% if profile.image %}
+            <img src="{{ profile.image.url }}" alt="Profile Image">
+          {% else %}
+            <img src="{% static 'default_image.png' %}" alt="Profile Image">
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- Profile Details Section -->
+      <div class="profile-details">
+        <h2>Your Profile</h2>
+
+        <div class="profile-row">
+          <div class="profile-label">Username:</div>
+          <div class="profile-value">{{ profile.user.username }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">First Name:</div>
+          <div class="profile-value">{{ profile.first_name }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Last Name:</div>
+          <div class="profile-value">{{ profile.last_name }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Email:</div>
+          <div class="profile-value">{{ profile.email }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Phone Number:</div>
+          <div class="profile-value">{{ profile.phone_number }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Shipping Address:</div>
+          <div class="profile-value">{{ profile.shipping_address }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Bio:</div>
+          <div class="profile-value">{{ profile.bio }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Date of Birth:</div>
+          <div class="profile-value">{{ profile.date_of_birth }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Gender:</div>
+          <div class="profile-value">{{ profile.get_gender_display }}</div>
+        </div>
+
+        <div class="profile-row">
+          <div class="profile-label">Payment Method:</div>
+          <div class="profile-value">{{ profile.payment_method }}</div>
+        </div>
+      </div>
+
+      <!-- Update Profile Button -->
+      <div class="profile-btn">
+        <a href="{% url 'accounts:update_profile' %}" class="btn btn-primary">Update Profile</a>
+      </div>
+    </div>
   </div>
+  {% endcomment %}
+
 {% endblock %}

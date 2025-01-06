@@ -1,53 +1,122 @@
 /*========================================
             PROFILE PAGE STYLE
 =========================================*/
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: #f7f7f7;
+}
+
+.profile-card {
+  background-color: #fff;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
 .profile-image {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .profile-image a {
   border-radius: 50%;
-  border: 2px solid var(--primary);
+  border: 2px solid #007bff;
+  display: inline-block;
 }
 
 .profile-image a img {
-  width: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 3px solid var(--white);
+  border: 3px solid #fff;
+}
+
+.profile-details {
+  margin-bottom: 30px;
+}
+
+.profile-details h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.profile-label {
+  font-weight: bold;
+  color: #555;
+}
+
+.profile-value {
+  color: #777;
+  text-align: right;
 }
 
 .profile-btn {
-  margin-top: 33px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .profile-btn a {
-  width: 100%;
+  width: 200px;
   height: 45px;
   line-height: 45px;
   border-radius: 8px;
   text-align: center;
   text-transform: capitalize;
-  color: var(--white);
-  background: var(--primary);
-  transition: all linear .3s;
-  -webkit-transition: all linear .3s;
-  -moz-transition: all linear .3s;
-  -ms-transition: all linear .3s;
-  -o-transition: all linear .3s;
+  color: #fff;
+  background: #007bff;
+  transition: all 0.3s ease;
 }
 
 .profile-btn a:hover {
-  background: var(--green);
+  background: #0056b3;
 }
 
 @media (max-width: 991px) {
-  .profile-btn {
+  .profile-card {
+    padding: 15px;
+  }
+
+  .profile-image a img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-btn a {
+    width: 100%;
+  }
+
+  .profile-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-value {
+    text-align: left;
     margin-top: 5px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .profile-image {
-    margin-bottom: 20px;
+@media (max-width: 768px) {
+  .profile-details h2 {
+    font-size: 20px;
+  }
+
+  .profile-row {
+    font-size: 14px;
   }
 }
