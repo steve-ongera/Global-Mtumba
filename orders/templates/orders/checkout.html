@@ -45,7 +45,7 @@
                                                     <td class="table-quantity"><h6>{{item.quantity}}</h6></td>
                                                     <td class="table-action">
                                                         <a class="view" href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i class="fas fa-eye"></i></a>
-                                                        <a class="trash" href="#" title="Remove Wishlist"><i class="icofont-trash"></i></a>
+                                                        <a class="trash" href='/orders/{{item.id}}/remove-from-cart' title="Remove Wishlist"><i class="icofont-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}
@@ -189,43 +189,35 @@
                                 <div class="row">
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment active">
-                                            <img src="images/payment/png/01.png" alt="payment">
-                                            <h4>card number</h4>
+                                            <img src="{% static 'en/images/payment/mpesa.png'%}" alt="payment">
+                                            <h4>Lipa na Mpesa</h4>
                                             <p>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <sup>1876</sup>
+                                                <sup>Till number: 687485</sup>
                                             </p>
-                                            <h5>Steve Ongera</h5>
+                                            <h5>Yuvaa Fashion Ltd</h5>
                                             <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment">
-                                            <img src="images/payment/png/02.png" alt="payment">
-                                            <h4>card number</h4>
+                                            <img src="{% static 'en/images/payment/pay-visa.png'%}" alt="payment">
+                                            <h4>Pay Visa</h4>
                                             <p>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <sup>1876</sup>
+                                                <sup>Currently not working </sup>
+                                                
                                             </p>
-                                            <h5>miron mahmud</h5>
+                                            <h5>Yuvaa Banking</h5>
                                             <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment">
-                                            <img src="images/payment/png/03.png" alt="payment">
-                                            <h4>card number</h4>
+                                            <img src="{% static 'en/images/payment/pay-mastercard.png'%}" alt="payment">
+                                            <h4>Mastercard</h4>
                                             <p>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <sup>1876</sup>
+                                                <sup>Currently not working </sup>
                                             </p>
-                                            <h5>Steve Ongera</h5>
+                                            <h5>Yuvaa Fashonna</h5>
                                             <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
                                         </div>
                                     </div>
@@ -236,7 +228,7 @@
                                 <label for="checkout-check">By making this purchase you agree to our <a href="#">Terms and Conditions</a>.</label>
                             </div>
                             <div class="checkout-proced">
-                                <a href="invoice.html" class="btn btn-inline">proced to checkout</a>
+                                <a href="#" class="btn btn-inline">proced to checkout</a>
                             </div>
                         </div>
                     </div>
