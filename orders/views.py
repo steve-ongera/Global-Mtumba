@@ -103,3 +103,23 @@ def checkout(request):
         'delivery_fee' : delivery_fee
         })
 
+
+def order_summary(request):
+    # Retrieve the user's active cart
+    cart = get_object_or_404(Cart, user=request.user, status="InProgress")
+    
+    # Get all cart details (products in the cart)
+    cart_details = cart.cart_detail.all()
+    
+    # Calculate the total price before and after applying the coupon
+    total_before_coupon = cart.cart_total()
+    total_after_coupon = cart.total_After_coupon if cart.total_After_coupon else total_before_coupon
+    
+    # Prepare context for the template
+    context = {
+        'cart': cart,
+        'cart_details': cart_details,
+        'total_before_coupon': total_before_coupon,
+        'total_after_coupon': total_after_coupon,
+    }
+    return render(request, 'orders\order_summary.html', context)
