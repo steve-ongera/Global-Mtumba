@@ -6,6 +6,13 @@ from taggit.managers import TaggableManager
 from django.utils.text import slugify
 from django.db.models.aggregates import Avg
 
+class ShoeSize(models.Model):
+    size = models.CharField(_('Size'), max_length=5)  # e.g., "7", "8", "9", "10"
+    
+    def __str__(self):
+        return self.size
+
+
 # Create your models here.
 FLAG_TYPES =[
     ('Sale','Sale'),
@@ -25,6 +32,8 @@ class Product(models.Model):
     brand = models.ForeignKey('Brand',verbose_name=_('Brand'), related_name='product_brand', on_delete=models.SET_NULL, null=True)
     tags = TaggableManager()
     slug = models.SlugField(null=True , blank=True )
+
+    available_sizes = models.ManyToManyField(ShoeSize, null=True, blank=True)
 
     order_count = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0 , null=True , blank=True)
