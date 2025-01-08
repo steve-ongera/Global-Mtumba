@@ -13,10 +13,19 @@ def home(request):
     feature_products = Product.objects.filter(flag='Feature')[:6]
     new_products = Product.objects.filter(flag='New')[:10]
     reviews = Review.objects.all()[:5]
+    #browse by top niche 
+    top_order_products = Product.objects.order_by('-order_count')[:10]
+    top_rating_products = Product.objects.order_by('-rating')[:10]
+    top_discount_products = Product.objects.order_by('-discount')[:10]
+
     return render(request,'settings/home.html',{
         'brands':brands ,
         'sale_products':sale_products ,
         'feature_products':feature_products ,
         'new_products':new_products ,
         'reviews':reviews ,
+
+        'top_order_products': top_order_products,
+        'top_rating_products': top_rating_products,
+        'top_discount_products': top_discount_products,
     })
