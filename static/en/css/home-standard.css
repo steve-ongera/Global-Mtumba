@@ -343,7 +343,7 @@
   opacity: 0.06;
   z-index: -1;
   border-radius: 5px;
-  background: url(../images/banner-shape.png);
+  /* background: url(../images/banner-shape.png); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
