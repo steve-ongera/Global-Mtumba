@@ -239,3 +239,5 @@ MPESA_CONSUMER_SECRET = 'pR1U2pgLoGuC5IDZqNHAOyJwfvjOJryA0JAeBlpn4X8NBvZDaQ4xiHW
 MPESA_SHORTCODE = '174379'  # Example sandbox shortcode, use your production shortcode when live
 MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
 MPESA_CALLBACK_URL = 'https://yourdomain.com/payment_callback/'  # URL to handle M-Pesa responses
+
+

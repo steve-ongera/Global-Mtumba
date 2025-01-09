@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import OrderList , checkout ,add_to_cart , remove_from_cart , order_summary , mpesa_initiate_payment,mpesa_payment_success,mpesa_payment_failed
+from .views import OrderList , checkout ,add_to_cart , remove_from_cart , order_summary , mpesa_initiate_payment,mpesa_payment_success,mpesa_payment_failed , mpesa_callback
 
 from .api import CartDetailCreateAPI , OrderListAPI , OrderDetailAPI , CreateOrderAPI , ApplyCouponAPI 
 
@@ -14,9 +14,11 @@ urlpatterns = [
     path('<int:id>/remove-from-cart',remove_from_cart),
     path('order-summary/', order_summary, name='order_summary'),
     #mpesa integrations
-    path('mpesa_payment/<int:order_id>/', mpesa_initiate_payment, name='mpesa_payment'),
-    path('mpesa_payment_success/', mpesa_payment_success, name='mpesa_payment_success'),
-    path('mpesa_payment_failed/', mpesa_payment_failed, name='mpesa_payment_failed'),
+
+    path('order/<int:order_id>/mpesa/', mpesa_initiate_payment, name='mpesa_initiate_payment'),
+    path('api/mpesa-callback/', mpesa_callback, name='mpesa_callback'),
+    path('order/mpesa/success/', mpesa_payment_success, name='mpesa_payment_success'),
+    path('order/mpesa/failed/', mpesa_payment_failed, name='mpesa_payment_failed'),
 
 
     # api  

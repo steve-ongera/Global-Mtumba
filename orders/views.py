@@ -237,43 +237,129 @@ def create_order_from_cart(user, cart):
 
 
 #mpesa integration
+# views.py
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from .models import Order
-from .utils import lipa_na_mpesa_online  # Assuming these are defined in utils.py
+from .utils import lipa_na_mpesa_online
+import json
 
 def mpesa_initiate_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-
-    # Calculate the total amount of the order by summing the total of each order detail
-    order_total = sum(detail.total for detail in order.order_detail.all())
+    
+    # Calculate total including any discounts
+    if order.total_After_coupon:
+        order_total = order.total_After_coupon
+    else:
+        order_total = sum(detail.total for detail in order.order_detail.all())
 
     if request.method == 'POST':
         phone_number = request.POST.get('phone_number')
-        account_reference = f'Order {order.code}'  # Or use order_number if you added it
-        transaction_desc = 'Payment for your order'
         
-        # Call the M-Pesa API function to initiate payment
-        response = lipa_na_mpesa_online(phone_number, order_total, account_reference, transaction_desc)
-
+        # Format phone number to include country code if needed
+        if not phone_number.startswith('254'):
+            phone_number = '254' + phone_number.lstrip('0')
+        
+        account_reference = f'Order_{order.code}'
+        transaction_desc = f'Payment for order {order.code}'
+        
+        # Add print statements for debugging
+        print(f"Phone Number: {phone_number}")
+        print(f"Amount: {order_total}")
+        print(f"Reference: {account_reference}")
+        
+        response = lipa_na_mpesa_online(
+            phone_number=phone_number,
+            amount=order_total,
+            reference=account_reference,
+            description=transaction_desc
+        )
+        
+        # Print the full response for debugging
+        print("M-Pesa API Response:", response)
+        
         if response.get('ResponseCode') == '0':
-            # Payment was successful, update order status and notify user
-            order.transaction_id = response.get('CheckoutRequestID')
-            order.transaction_status = 'Pending'
+            order.status = 'Processed'
             order.save()
+            
+            request.session['mpesa_checkout_id'] = response.get('CheckoutRequestID')
+            request.session['order_id'] = order_id
+            
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Payment initiated successfully',
+                'checkout_id': response.get('CheckoutRequestID')
+            })
+        
+        # Return the actual error message from M-Pesa
+        return JsonResponse({
+            'status': 'error',
+            'message': response.get('ResponseDescription', 'Payment initiation failed'),
+            'details': response  # Include full response for debugging
+        }, status=400)
+    
+    return render(request, 'orders/mpesa.html', {
+        'order': order,
+        'total': order_total
+    })
 
-            # Optionally send an SMS to the user
-            #sms_body = f"Thank you for your order! Your payment for Order {order.code} is pending."
-            #send_sms(phone_number, sms_body)
-
-            return redirect('orders:mpesa_payment_success')
-        else:
-            return redirect('orders:mpesa_payment_failed')
-
-    return render(request, 'orders/mpesa.html', {'order': order})
-
+@csrf_exempt
+def mpesa_callback(request):
+    if request.method == 'POST':
+        try:
+            callback_data = json.loads(request.body)
+            result = callback_data.get('Body', {}).get('stkCallback', {})
+            
+            checkout_request_id = result.get('CheckoutRequestID')
+            result_code = result.get('ResultCode')
+            result_desc = result.get('ResultDesc')
+            
+            # Find the order using the checkout request ID from the session
+            try:
+                order = Order.objects.get(code=checkout_request_id)
+                
+                if result_code == "0":
+                    # Payment successful
+                    order.status = 'Processed'
+                    
+                    # If you want to store transaction details
+                    if 'CallbackMetadata' in result:
+                        metadata = result['CallbackMetadata']['Item']
+                        for item in metadata:
+                            if item['Name'] == 'MpesaReceiptNumber':
+                                order.payment_id = item['Value']
+                            elif item['Name'] == 'Amount':
+                                order.amount_paid = str(item['Value'])
+                            
+                else:
+                    # Payment failed
+                    order.status = 'Received'  # Reset to initial status
+                
+                order.save()
+                
+                return JsonResponse({'status': 'success'})
+                
+            except Order.DoesNotExist:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Order not found'
+                }, status=404)
+                
+        except json.JSONDecodeError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Invalid JSON payload'
+            }, status=400)
+    
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Invalid request method'
+    }, status=405)
 
 def mpesa_payment_success(request):
-    return render(request, 'orders\mpesa_payment_success.html')
+    return render(request, 'orders/mpesa_payment_success.html')
 
 def mpesa_payment_failed(request):
-    return render(request, 'orders\mpesa_payment_failed.html')
+    return render(request, 'orders/mpesa_payment_failed.html')
