@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Payment</title>
+    <style>
+        .spinner {
+            border: 4px solid #f3f3f3; 
+            border-top: 4px solid #3498db; 
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px;">
+        <div class="spinner"></div>
+        <p class="message">Waiting for you to enter your PIN...</p>
+    </div>
+    <script>
+        // Poll for M-Pesa payment status
+        const checkStatus = async () => {
+            try {
+                const response = await fetch("{% url 'orders:mpesa_callback' %}");
+                const data = await response.json();
+                if (data.status === 'success') {
+                    window.location.href = "{% url 'orders:mpesa_payment_success' %}";
+                } else if (data.status === 'error') {
+                    window.location.href = "{% url 'orders:mpesa_payment_failed' %}";
+                }
+            } catch (error) {
+                console.error('Error checking payment status:', error);
+            }
+        };
+
+        // Call checkStatus every 5 seconds
+        setInterval(checkStatus, 5000);
+    </script>
+</body>
+</html>

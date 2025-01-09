@@ -287,11 +287,7 @@ def mpesa_initiate_payment(request, order_id):
             request.session['mpesa_checkout_id'] = response.get('CheckoutRequestID')
             request.session['order_id'] = order_id
             
-            return JsonResponse({
-                'status': 'success',
-                'message': 'Payment initiated successfully',
-                'checkout_id': response.get('CheckoutRequestID')
-            })
+            return render(request, 'orders/mpesa_loading.html', {'checkout_id': response.get('CheckoutRequestID')})
         
         # Return the actual error message from M-Pesa
         return JsonResponse({

@@ -33,7 +33,7 @@ class Product(models.Model):
     tags = TaggableManager()
     slug = models.SlugField(null=True , blank=True )
 
-    available_sizes = models.ManyToManyField(ShoeSize, null=True, blank=True)
+    available_sizes = models.ManyToManyField(ShoeSize,  blank=True)
 
     order_count = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0 , null=True , blank=True)
