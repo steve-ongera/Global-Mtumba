@@ -47,23 +47,26 @@
                                         </tr>
                                         {% endfor %}
                                     </tbody>
-                             </table>
-        <hr>
-        <h3>Total : ksh {{ total_before_coupon }}</h3>
-        {% if cart.coupon %}
-            <h3>Coupon Applied: {{ cart.coupon.code }} ({{ cart.coupon.discount }}% off)</h3>
-            <h3>Total After Coupon: ksh{{ total_after_coupon }}</h3>
-        {% endif %}
-    </div>
+                                </table>
+                            <hr>
+                            <h3>Total : ksh {{ total_before_coupon }}</h3>
+                            {% if cart.coupon %}
+                                <h3>Coupon Applied: {{ cart.coupon.code }} ({{ cart.coupon.discount }}% off)</h3>
+                                <h3>Total After Coupon: ksh{{ total_after_coupon }}</h3>
+                            {% endif %}
+                        </div>
 
-    <div class="actions">
-        <a href="#" class="btn btn-primary">Proceed to Lipa Na Mpesa</a>
-    </div>
+                        <div class="actions">
+                           
+                            <a href="{% url 'orders:mpesa_payment' order_id=order.id %}" class="btn btn-inline">Pay with M-Pesa</a>
 
-</div>
-</div>
-</div>
-</div>
-</div>
+                        </div>
+                        
+                    </div>
+               </div>
+           </div>
+      </div>
+ </div>
 </section>
+
 {% endblock %}

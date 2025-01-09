@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay with M-Pesa</title>
+</head>
+<body>
+    <h1>Pay with M-Pesa</h1>
+    
+    {% if order %}
+        <p>Order ID: {{ order.id }}</p>
+        <p>Total Amount: {{ order.total_After_coupon }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="phone_number">Enter Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required>
+            <button type="submit">Pay Now</button>
+        </form>
+    {% else %}
+        <p>No order found.</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+{% comment %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.phone-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+#progressBarContainer {
+    height: 3px;
+    background-color: #e0e0e0; /* Light gray background for progress bar */
+    border-radius: 8px; /* Rounded corners */
+    margin-top: 10px;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0; /* Start with 0% width */
+    border-radius: 8px; /* Rounded corners */
+    transition: width 0.4s ease; /* Smooth transition for progress */
+}
+
+.error-message {
+    color: red; /* Red text for error message */
+    margin-top: 10px;
+    font-size: 8px;
+    display: none; /* Initially hidden */
+}
+
+button:disabled {
+    background-color: #ccc; /* Gray background when disabled */
+    cursor: not-allowed; /* Not-allowed cursor */
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer; /* Pointer cursor for button */
+}
+</style>
+
+<section class="inner-section checkout-part">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+	<div class="container">
+
+		<!-- ============================ COMPONENT 1 ================================= -->
+		<h4 class="text-center mb-20">Review Your Order and Make Payment</h4>
+		<div class="row">
+
+			<aside class="col-lg-8">
+				<div class="card">
+					<h5 class="card-header">Enter Your Phone Number for Payment</h5>
+					<div class="card-body">
+						<form method="POST">
+                            {% csrf_token %}
+                          
+                            <br>
+                            <br>
+                            <div>
+                                <input type="text" name="phone_number" class="phone-input" placeholder="Phone Number" required id="phoneNumber">
+                                <div id="errorMessage" class="error-message">Kindly start with 254 (eg 254112284093 or 254757790687)</div>
+                                <div id="progressBarContainer">
+                                    <div id="progressBar"></div>
+                                </div>
+                                <button type="submit" id="submitButton" disabled>Pay with Mpesa</button>
+                            </div>
+                        </form>
+
+
+					</div>
+				</div>
+				<br>
+				
+				<br>
+			
+				<br>
+
+			</aside> <!-- col.// -->
+			<!-- col.// -->
+
+
+		</div> <!-- row.// -->
+
+		<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+	</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<script>
+    const phoneInput = document.getElementById('phoneNumber');
+    const progressBar = document.getElementById('progressBar');
+    const submitButton = document.getElementById('submitButton');
+    const errorMessage = document.getElementById('errorMessage');
+
+    phoneInput.addEventListener('input', function() {
+        const phoneNumber = phoneInput.value;
+        const isValidLength = phoneNumber.length === 12;
+        const startsWith254 = phoneNumber.startsWith('254');
+        
+        let progress = 0;
+
+        // Check criteria
+        if (startsWith254) {
+            progress += 50; // Add 50% for starting with 254
+            errorMessage.style.display = 'none'; // Hide error message
+        } else {
+            errorMessage.style.display = 'block'; // Show error message
+        }
+        
+        if (isValidLength) {
+            progress += 50; // Add another 50% for valid length
+        }
+
+        // Update progress bar
+        progressBar.style.width = `${progress}%`;
+        
+        if (progress === 100) {
+            progressBar.style.backgroundColor = 'green'; // Valid
+            submitButton.disabled = false; // Enable button
+        } else {
+            progressBar.style.backgroundColor = 'red'; // Invalid
+            submitButton.disabled = true; // Disable button
+        }
+    });
+
+    // Function to handle button click
+    
+</script>
+
+{% endblock %}
+
+{% endcomment %}
