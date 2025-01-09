@@ -56,6 +56,12 @@ class Order(models.Model):
     delivery_time = models.DateTimeField(null=True,blank=True)
     coupon = models.ForeignKey('Coupon',related_name='order_coupon',on_delete=models.SET_NULL,null=True,blank=True)
     total_After_coupon = models.FloatField(null=True,blank=True)
+    #tracking mpesa payment 
+    mpesa_checkout_id = models.CharField(max_length=100, null=True, blank=True)
+    payment_status = models.CharField(max_length=20, default='pending')  # pending, completed, failed
+    mpesa_receipt_number = models.CharField(max_length=50, null=True, blank=True)
+    payment_phone = models.CharField(max_length=15, null=True, blank=True)
+    
     def __str__(self):
         return str(self.user)
     

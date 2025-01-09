@@ -250,10 +250,7 @@ def mpesa_initiate_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     
     # Calculate total including any discounts
-    if order.total_After_coupon:
-        order_total = order.total_After_coupon
-    else:
-        order_total = sum(detail.total for detail in order.order_detail.all())
+    order_total = order.total_After_coupon if order.total_After_coupon else sum(detail.total for detail in order.order_detail.all())
 
     if request.method == 'POST':
         phone_number = request.POST.get('phone_number')
@@ -282,6 +279,10 @@ def mpesa_initiate_payment(request, order_id):
         
         if response.get('ResponseCode') == '0':
             order.status = 'Processed'
+            # Update order with checkout details
+            order.mpesa_checkout_id = response.get('CheckoutRequestID')
+            order.payment_status = 'pending'
+            order.payment_phone = phone_number
             order.save()
             
             request.session['mpesa_checkout_id'] = response.get('CheckoutRequestID')
@@ -318,16 +319,24 @@ def mpesa_callback(request):
                 
                 if result_code == "0":
                     # Payment successful
+                    order.payment_status = 'completed'
                     order.status = 'Processed'
-                    
-                    # If you want to store transaction details
+
+                    # Extract MpesaReceiptNumber from callback metadata
                     if 'CallbackMetadata' in result:
                         metadata = result['CallbackMetadata']['Item']
                         for item in metadata:
                             if item['Name'] == 'MpesaReceiptNumber':
-                                order.payment_id = item['Value']
-                            elif item['Name'] == 'Amount':
-                                order.amount_paid = str(item['Value'])
+                                order.mpesa_receipt_number = item['Value']
+                    
+                    # If you want to store transaction details
+                    # if 'CallbackMetadata' in result:
+                    #     metadata = result['CallbackMetadata']['Item']
+                    #     for item in metadata:
+                    #         if item['Name'] == 'MpesaReceiptNumber':
+                    #             order.payment_id = item['Value']
+                    #         elif item['Name'] == 'Amount':
+                    #             order.amount_paid = str(item['Value'])
                             
                 else:
                     # Payment failed
@@ -353,6 +362,20 @@ def mpesa_callback(request):
         'status': 'error',
         'message': 'Invalid request method'
     }, status=405)
+
+def check_transaction_status(request, checkout_request_id):
+    try:
+        order = Order.objects.get(mpesa_checkout_id=checkout_request_id)
+        return JsonResponse({
+            'status': order.payment_status,
+            'receipt_number': order.mpesa_receipt_number
+        })
+    except Order.DoesNotExist:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Order not found'
+        }, status=404)
+    
 
 def mpesa_payment_success(request):
     return render(request, 'orders/mpesa_payment_success.html')

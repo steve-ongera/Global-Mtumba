@@ -1,12 +1,24 @@
-<form method="POST">
-    {% csrf_token %}
-    <div>
-        <label for="phone_number">M-Pesa Phone Number:</label>
-        <input type="text" name="phone_number" id="phone_number" required>
-    </div>
-    <div>
-        <p>Total Amount: KES {{ total }}</p>
-    </div>
-    <button type="submit">Pay with M-Pesa</button>
-</form>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay with M-Pesa</title>
+</head>
+<body>
+    <h1>Pay with M-Pesa</h1>
+    
+    {% if order %}
+        <p>Order ID: {{ order.id }}</p>
+        <p>Total Amount: {{ order.total_After_coupon }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="phone_number">Enter Phone Number:</label>
+            <input type="tel" id="phone_number" name="phone_number" required>
+            <button type="submit">Pay Now</button>
+        </form>
+    {% else %}
+        <p>No order found.</p>
+    {% endif %}
+</body>
+</html>
