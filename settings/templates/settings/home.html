@@ -130,10 +130,10 @@
                                         <i class="icofont-star {% if item.avg_rate > 2 %}active{% endif %} "></i>
                                         <i class="icofont-star {% if item.avg_rate > 3 %}active{% endif %} "></i>
                                         <i class="icofont-star {% if item.avg_rate > 4 %}active{% endif %} "></i>
-                                        <a href="">({{object.review_product.all|length}})</a>
+                                        <a href=""> ({{ item.rating }})</a>
                                     </div>
                                     <h6 class="product-name">
-                                        <ahref="{% url 'product:product-detail' item.slug %}">{{item}}</ahref=>
+                                        <a href="{% url 'product:product-detail' item.slug %}">{{item}}</a>
                                     </h6>
                                     <h6 class="product-price">
                                         <span>ksh {{item.price}}</span>
@@ -211,7 +211,7 @@
                                         <i class="icofont-star {% if item.avg_rate > 2 %}active{% endif %} "></i>
                                         <i class="icofont-star {% if item.avg_rate > 3 %}active{% endif %} "></i>
                                         <i class="icofont-star {% if item.avg_rate > 4 %}active{% endif %} "></i>
-                                        <a href="">({{object.review_product.all|length}})</a>
+                                        <a href="">({{item.rating}})</a>
                                     </div>
                                     <h6 class="feature-price">
                                         <span>ksh {{item.price}}</span>
@@ -289,7 +289,7 @@
                                                 <i class="icofont-star {% if item.avg_rate > 2 %}active{% endif %} "></i>
                                                 <i class="icofont-star {% if item.avg_rate > 3 %}active{% endif %} "></i>
                                                 <i class="icofont-star {% if item.avg_rate > 4 %}active{% endif %} "></i>
-                                                <a href="">({{object.review_product.all|length}})</a>
+                                                <a href="">({{item.rating}})</a>
                                             </div>
                                             <h6 class="product-name">
                                                 <a href="product-video.html">{{item}}</a>

@@ -11,7 +11,7 @@
             <div class="container">
                 <h2>Order History</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Orderlist</li>
                 </ol>
             </div>
@@ -48,7 +48,7 @@
                         {% for object in object_list %}
                             <div class="orderlist">
                                 <div class="orderlist-head">
-                                    <h5>order#01</h5>
+                                    <h5>{{object.code}}</h5>
                                     <h5>order {{object.status}}</h5>
                                 </div>
                                 <div class="orderlist-body">
@@ -83,7 +83,7 @@
                                                 </li>
                                                 <li>
                                                     <h6>Total Item</h6>
-                                                    <p>6 Items</p>
+                                                    <p>{{ cart_detail.count }} Items</p>
                                                 </li>
                                                 <li>
                                                     <h6>Order Time</h6>
@@ -99,26 +99,26 @@
                                             <ul class="orderlist-details">
                                                 <li>
                                                     <h6>Sub Total</h6>
-                                                    <p>$10,864.00</p>
+                                                    <p>ksh {{ sub_total }} </p>
                                                 </li>
                                                 <li>
                                                     <h6>discount</h6>
-                                                    <p>$20.00</p>
+                                                    <p>ksh {{ coupon }} </p>
                                                 </li>
                                                 <li>
                                                     <h6>delivery fee</h6>
-                                                    <p>$49.00</p>
+                                                    <p>ksh {{ delivery_fee }}</p>
                                                 </li>
                                                 <li>
                                                     <h6>Total<small>(Incl. VAT)</small></h6>
-                                                    <p>$10,874.00</p>
+                                                    <p>ksh {{ cart_total }}</p>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="orderlist-deliver">
                                                 <h6>Delivery location</h6>
-                                                <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
+                                                <p>Nairobi , Karanani, Mwiki.  road no-17/A</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -140,7 +140,7 @@
                                                                 <td class="table-serial"><h6>{{forloop.counter}}</h6></td>
                                                                 <td class="table-image"><img src="{{item.product.image.url}}" alt="product"></td>
                                                                 <td class="table-name"><h6>{{item.product}}</h6></td>
-                                                                <td class="table-price"><h6>${{item.product.price}}</h6></td>
+                                                                <td class="table-price"><h6>ksh {{item.product.price}}</h6></td>
                                                                 <td class="table-brand"><h6>{{item.product.brand}}</h6></td>
                                                                 <td class="table-quantity"><h6>{{item.quantity}}</h6></td>
                                                             </tr>

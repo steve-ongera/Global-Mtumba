@@ -78,21 +78,7 @@ def checkout(request):
                     
                 })
                 return JsonResponse({'result':html})
-
-
-
-                # return render(request,'orders/checkout.html',{
-                #     'cart_detail' : cart_detail,
-                #     'sub_total' : cart_total,
-                #     'cart_total' : total,
-                #     'coupon' : coupon_value ,
-                #     'delivery_fee' : delivery_fee
-                    
-                # })
-
-    # else:
-    #     total =  delivery_fee + cart.cart_total()
-    #     coupon = 0 ,        
+       
 
     return render(request ,'orders\checkout.html',
         {
