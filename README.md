@@ -60,7 +60,7 @@ To run the Global Online Mtumba project locally, follow these steps:
 7. Open your browser and visit `http://127.0.0.1:8000` to access the application.
 
 # Project Demo
-![](screenshot.png)
+![](screenshot_1.png)
 
 
 ## Make sure you have Python and Django installed on your machine before running the project.
