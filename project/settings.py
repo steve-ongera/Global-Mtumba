@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-fbdxyz@l6u0g!&gubim20i^k*y&yhinp42e$co=hw7)(dn%hx*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','https://c260-2c0f-6300-d09-fd00-816b-11ed-a22e-d0da.ngrok-free.app']
 
 
 # Application definition
@@ -60,6 +60,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://c260-2c0f-6300-d09-fd00-816b-11ed-a22e-d0da.ngrok-free.app',
+]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
